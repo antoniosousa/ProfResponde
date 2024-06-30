@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Route;
 Route::post('/pergunta/store', [PerguntaController::class, 'store'])->name('pergunta.store');
 
 Route::get('/', function () {
+    if(app()->isLocal()) {
+        auth()->loginUsingId(1);
+
+        return to_route('dashboard');
+    }
+
     return view('welcome');
 });
 
