@@ -18,13 +18,25 @@ test('deve ser capaz de criar uma nova pergunta com mais de 255 caracteres', fun
 });
 
 test('deve verificar se termina com ponto de interrogação ?', function () {
-    $response = $this->get('/');
+    $user = User::factory()->create();
+    actingAs($user);
 
-    $response->assertStatus(200);
+    $request = post(route('pergunta.store'), [
+        'pergunta' => str_repeat('*', 8) . '?',
+    ]);
+
+    $request->assertSessionHasErrors(['pergunta' => __('validation.min.string', ['min' => 10, 'attribute' => 'pergunta'])]);
+    assertDatabaseCount('perguntas', 0);
 })->todo();
 
 test('deve ter pelo menos 10 caracteres', function () {
-    $response = $this->get('/');
+    $user = User::factory()->create();
+    actingAs($user);
 
-    $response->assertStatus(200);
-})->todo();
+    $request = post(route('pergunta.store'), [
+        'pergunta' => str_repeat('*', 8) . '?',
+    ]);
+
+    $request->assertSessionHasErrors(['pergunta' => __('validation.min.string', ['min' => 10, 'attribute' => 'pergunta'])]);
+    assertDatabaseCount('perguntas', 0);
+});

@@ -10,7 +10,7 @@ class PerguntaController extends Controller
     public function store(): RedirectResponse
     {
         $atibutos = request()->validate([
-            'pergunta' => ['required'],
+            'pergunta' => ['required', 'min:10'],
         ]);
         Pergunta::query()->create($atibutos);
 
