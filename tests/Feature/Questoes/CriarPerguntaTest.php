@@ -22,12 +22,14 @@ test('deve verificar se termina com ponto de interrogação ?', function () {
     actingAs($user);
 
     $request = post(route('pergunta.store'), [
-        'pergunta' => str_repeat('*', 8) . '?',
+        'pergunta' => str_repeat('*', 10),
     ]);
 
-    $request->assertSessionHasErrors(['pergunta' => __('validation.min.string', ['min' => 10, 'attribute' => 'pergunta'])]);
+    $request->assertSessionHasErrors([
+        'pergunta' => 'Tem certeza de que é uma pergunta? Está faltando o ponto de interrogação no final!',
+    ]);
     assertDatabaseCount('perguntas', 0);
-})->todo();
+});
 
 test('deve ter pelo menos 10 caracteres', function () {
     $user = User::factory()->create();
