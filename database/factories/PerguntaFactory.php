@@ -17,7 +17,7 @@ class PerguntaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'pergunta' => fake()->realText(50),
         ];
     }
 }
