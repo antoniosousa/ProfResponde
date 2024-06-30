@@ -25,21 +25,23 @@ jobs:
 
     - name: Installing Package.json
       run: npm install
-      
+
     - name: Build Assets
       run: npm run build
-      
+
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
-        
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test --parallel
+
     - name: Execute Larastan
       run: vendor/bin/phpstan analyse
+
     - name: Execute Laravel Pint
       run: vendor/bin/pint --test
