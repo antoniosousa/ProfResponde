@@ -42,3 +42,14 @@ test('deve ter pelo menos 10 caracteres', function () {
     $request->assertSessionHasErrors(['pergunta' => __('validation.min.string', ['min' => 10, 'attribute' => 'pergunta'])]);
     assertDatabaseCount('perguntas', 0);
 });
+
+test('toda tarefa criada deve ser rascunho', function () {
+    $user = User::factory()->create();
+    actingAs($user);
+
+    $request = post(route('pergunta.store'), [
+        'pergunta' => str_repeat('*', 10) . '?',
+    ]);
+
+    assertDatabaseHas('perguntas', ['publicada' => false]);
+});

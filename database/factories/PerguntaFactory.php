@@ -17,7 +17,8 @@ class PerguntaFactory extends Factory
     public function definition(): array
     {
         return [
-            'pergunta' => fake()->realText(50),
+            'pergunta'  => fake()->realText(50),
+            'publicada' => fake()->boolean(),
         ];
     }
 }
