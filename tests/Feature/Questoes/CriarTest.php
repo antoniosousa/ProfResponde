@@ -53,3 +53,9 @@ test('toda tarefa criada deve ser rascunho', function () {
 
     assertDatabaseHas('perguntas', ['publicada' => false]);
 });
+
+test('somente usuários autenticados podem criar perguntas', function () {
+    post(route('pergunta.store'), [
+        'pergunta' => str_repeat('*', 10) . '?',
+    ])->assertRedirect(route('login'));
+});
