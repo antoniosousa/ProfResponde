@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class PerguntaFactory extends Factory
         return [
             'pergunta'  => fake()->realText(50),
             'publicada' => fake()->boolean(),
+            'user_id'   => User::factory(),
         ];
     }
 }

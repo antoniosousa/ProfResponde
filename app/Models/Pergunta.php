@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class Pergunta extends Model
 {
@@ -24,14 +24,8 @@ class Pergunta extends Model
         return $this->votos()->sum('voto');
     }
 
-    public function publicar(): bool
+    public function user(): BelongsTo
     {
-        if(!$this->publicada) {
-            $this->update(['publicada' => true]);
-
-            return true;
-        }
-
-        return false;
+        return $this->belongsTo(User::class);
     }
 }

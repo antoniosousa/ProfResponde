@@ -51,7 +51,7 @@
             <tr>
                 <th scope="col" class="px-6 py-3">Dúvidas</th>
                 <th scope="col" class="px-6 py-3"></th>
-                <th scope="col" class="px-6 py-3"></th>
+                <th scope="col" class="px-6 py-3">Ações</th>
                 <th scope="col" class="px-6 py-3">Votos</th>
                 </th><th scope="col" class="px-6 py-3"></th>
             </tr>
@@ -63,7 +63,9 @@
                     {{ $p->pergunta }}
                 </th>
                 <td class="px-6 py-4"></td>
-                <td class="px-6 py-4"></td>
+                <td class="px-6 py-4">
+                    Publicar | Excluir
+                </td>
                 <td class="px-6 py-4">{{ $p->votos_sum_voto ?: 0  }}</td>
                 <td class="px-6 py-4">
                     <form action="{{ route('votar', $p->id) }}" method="POST">
