@@ -23,4 +23,15 @@ class Pergunta extends Model
     {
         return $this->votos()->sum('voto');
     }
+
+    public function publicar(): bool
+    {
+        if(!$this->publicada) {
+            $this->update(['publicada' => true]);
+
+            return true;
+        }
+
+        return false;
+    }
 }

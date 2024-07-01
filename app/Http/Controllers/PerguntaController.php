@@ -17,4 +17,11 @@ class PerguntaController extends Controller
 
         return to_route('dashboard');
     }
+
+    public function publicar(Pergunta $pergunta): RedirectResponse
+    {
+        $pergunta->update(['publicada' => true]);
+
+        return back();
+    }
 }

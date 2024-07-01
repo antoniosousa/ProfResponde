@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/pergunta/store', [PerguntaController::class, 'store'])->name('pergunta.store');
 Route::post('/{pergunta}/votar', VotoController::class)->name('votar');
+Route::put('/{pergunta}/publicar', [PerguntaController::class, 'publicar'])->name('pergunta.publicar');
 
 Route::get('/', function () {
     if(app()->isLocal()) {
