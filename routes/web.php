@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\{DashboardController, PerguntaController, ProfileController};
+use App\Http\Controllers\{DashboardController, PerguntaController, ProfileController, VotoController};
 use Illuminate\Support\Facades\Route;
 
 Route::post('/pergunta/store', [PerguntaController::class, 'store'])->name('pergunta.store');
+Route::post('/{pergunta}/votar', VotoController::class)->name('votar');
 
 Route::get('/', function () {
     if(app()->isLocal()) {

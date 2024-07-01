@@ -10,10 +10,10 @@ class PerguntaController extends Controller
 {
     public function store(): RedirectResponse
     {
-        $atibutos = request()->validate([
+        $atributos = request()->validate([
             'pergunta' => ['required', 'min:10', new PontoDeInterrogacao()],
         ]);
-        Pergunta::query()->create($atibutos);
+        Pergunta::query()->create($atributos);
 
         return to_route('dashboard');
     }
