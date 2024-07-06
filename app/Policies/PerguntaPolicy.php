@@ -10,4 +10,9 @@ class PerguntaPolicy
     {
         return $pergunta->user->is($user);
     }
+
+    public function minhasPerguntas(User $user, Pergunta $pergunta): bool
+    {
+        return $pergunta->user->is($user);
+    }
 }

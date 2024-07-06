@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pergunta;
+use App\Models\{Pergunta};
 use App\Rules\PontoDeInterrogacao;
 use Illuminate\Http\{RedirectResponse};
+use Illuminate\View\View;
 
 class PerguntaController extends Controller
 {
@@ -16,17 +17,28 @@ class PerguntaController extends Controller
 
         auth()->user()->perguntas()->create($atributos);
 
-        return to_route('dashboard');
+        return back();
     }
 
     public function publicar(Pergunta $pergunta): RedirectResponse
     {
-        if(auth()->user()->cannot('publicar', $pergunta)) {
+        $user = auth()->user();
+
+        if($user->cannot('publicar', $pergunta)) {
             abort(403);
         }
 
         $pergunta->update(['publicada' => true]);
 
         return back();
+    }
+
+    public function minhasPerguntas(Pergunta $pergunta): View
+    {
+        $user = auth()->user();
+
+        return view('perguntas.minhasPerguntas', [
+            'perguntas' => $user->perguntas,
+        ]);
     }
 }

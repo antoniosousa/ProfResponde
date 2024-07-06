@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/pergunta/store', [PerguntaController::class, 'store'])->name('pergunta.store');
     Route::post('/{pergunta}/votar', VotoController::class)->name('votar');
     Route::put('/{pergunta}/publicar', [PerguntaController::class, 'publicar'])->name('pergunta.publicar');
+    Route::get('/minhas/perguntas', [PerguntaController::class, 'minhasPerguntas'])->name('minhas.perguntas');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

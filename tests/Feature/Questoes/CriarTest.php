@@ -10,9 +10,8 @@ test('deve ser capaz de criar uma nova pergunta com mais de 255 caracteres', fun
 
     $request = post(route('pergunta.store'), [
         'pergunta' => str_repeat('*', 260) . '?',
-    ]);
+    ])->assertRedirect();
 
-    $request->assertRedirect(route('dashboard'));
     assertDatabaseCount('perguntas', 1);
     assertDatabaseHas('perguntas', ['pergunta' => str_repeat('*', 260) . '?']);
 });
